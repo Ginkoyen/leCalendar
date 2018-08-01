@@ -1,0 +1,197 @@
+/* ---------------------------- HEADER -----------------------------
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+----------------------------------------------------------------- */
+
+
+/* ---- Schedule ---- */
+.schedules-header, .schedules-content {
+  display: flex;
+  margin-top: 5px;
+  cursor: cell;
+  overflow: hidden;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+.schedules-header {
+  position: absolute;
+  padding-bottom: 1px;
+  width: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+.schedules-header caption, .schedules-header thead {
+  background-color: white;
+}
+.schedules-header td {
+  border-color: transparent;
+}
+.schedules-content, .schedules-header {
+  max-height: 1024px;
+}
+.schedules-content.scroll {
+  overflow: scroll;
+}
+.schedules-header table, .schedules-content table {
+  border-collapse: collapse;
+  margin-right: 2px;
+}
+.schedules-header caption, .schedules-content caption {
+  border: solid 1px black;
+  background-color: #02658e;
+  color: white;
+  font-family: calibri;
+  caption-side: top;
+  align: center;
+}
+
+.schedules-content td, .schedules-header td {
+  height: 30px;
+  text-align: center;
+  background-repeat: repeat;
+  min-width: 20px;
+}
+.schedules-content td.prj, .schedules-header td.prj {
+  min-width: 80px;
+}
+.schedules-content td.today  {
+  border: solid 2px #ff8c1a;
+}
+
+/* ---- Modification ---- */
+.schedule-mod {
+  height: 25px;
+  opacity: 0;
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 10px;
+  box-shadow: 1px 1px 12px #555;
+  margin-top: -12px;
+  -webkit-transition: 0.4s; /* Safari */
+  -khtml-transition: 0.4s; /* Konqueror HTML */
+  -moz-transition: 0.4s; /* Firefox */
+  -ms-transition: 0.4s; /* Internet Explorer/Edge */
+  transition: 0.4s; /* Non-prefixed version, currently */
+}
+.schedule-mod a {
+  background-color: transparent;
+  border: none;
+  color: #02658e;
+  padding: 8px 16px;
+  vertical-align: middle;
+  text-decoration: none;
+  display: block;
+  float: left;
+  font-size: 10px;
+  cursor: pointer;
+  border-right: 1px solid #bfbfbd;
+}
+.schedule-mod a:hover, .schedule-mod a.disabled {
+  color: #bfbfbd;
+}
+.schedule-mod:hover {
+  height: 45px;
+  opacity: 1;
+}
+
+.conf {
+  color: red;
+  font: 1.2em Calibri, Sans-Serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 15px;
+}
+.pen-mod {
+  text-align: center;
+  float: right;
+  margin-right: 2px;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ---- Cell (td) ---- */
+/* haut | droite | bas | gauche */
+.n {
+  border: solid 1px #898D8C;
+}
+.s {
+  border: solid 1px black;
+}
+
+.n-t {
+  border-top: solid 1px #898D8C;
+}
+.n-l {
+  border-left: solid 1px #898D8C;
+}
+.n-b {
+  border-bottom: solid 1px #898D8C;
+}
+.n-r {
+  border-right: solid 1px #898D8C;
+}
+
+.s-t {
+  border-top: solid 1px black;
+}
+.s-l {
+  border-left: solid 1px black;
+}
+.s-b {
+  border-bottom: solid 1px black;
+}
+.s-r {
+  border-right: solid 1px black;
+}
+
+.d-t {
+  border-top: dashed 1px black;
+}
+.d-l {
+  border-left: dashed 1px black;
+}
+.d-b {
+  border-bottom: dashed 1px black;
+}
+.d-r {
+  border-right: dashed 1px black;
+}
+
+.d-t-w {
+  border-top: dashed 1px white;
+}
+.d-l-w {
+  border-left: dashed 1px white;
+}
+.d-b-w {
+  border-bottom: dashed 1px white;
+}
+.d-r-w {
+  border-right: dashed 1px white;
+}
+
+/* ---- Media queries ---- */
+@media only screen and (min-width: 768px) {
+  .schedule-mod {
+    margin-top: -4px;
+  }
+}

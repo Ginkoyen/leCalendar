@@ -1,0 +1,637 @@
+/* ---------------------------- HEADER -----------------------------
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+----------------------------------------------------------------- */
+
+
+/* ---- Init ---- */
+body {
+  font: 0.876em Calibri, Sans-Serif;
+  color: #1c1c1c;
+  min-width: 420px;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+p, ul {
+  margin: 0 0 1.5em;
+}
+ul {
+  list-style: disc;
+  padding: 0 0 0 20px;
+}
+a {
+  color: #02658e;
+}
+
+.wrapper {
+  position: relative;
+}
+
+/* ---- Header ---- */
+header {
+  min-width: 420px;
+  background: white;
+  padding: 0 20px 15px;
+  box-shadow: 1px 1px 12px #555;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+header:before, header:after {
+  content: "";
+  display: table;
+}
+header:after {
+  clear: both;
+}
+header {
+  zoom: 1;
+}
+
+/* ---- Logo ---- */
+.logo a {
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 22px;
+  float: left;
+  letter-spacing: 0.2em;
+  min-height: 1.8em;
+}
+.logo a img {
+  height: 40px;
+}
+
+/* ---- Beta mention ---- */
+.beta {
+  cursor: pointer;
+  font: 10px/1.0em Calibri, Sans-Serif;
+  font-weight: bold;
+  float: right;
+  color: #ff8c1a;
+  margin-right: 10px;
+  margin-top: 16px;
+}
+
+/* ---- Menu button ---- */
+.menu-open {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 10px 0;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.icon-bar {
+  display: block;
+  width: 24px;
+  height: 4px;
+  background-color: #cecece;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  -ms-border-radius: 1px;
+  -o-border-radius: 1px;
+  border-radius: 1px;
+}
+.icon-bar + .icon-bar {
+  margin-top: 3px;
+}
+.menu-open:hover span {
+  background-color: #02658e;
+}
+
+/* ---- Menu sidenav ---- */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  background-color: #02658e;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 1.4em;
+  color: #FFF;
+  display: block;
+  transition: 0.3s;
+}
+.sidenav a:hover, .sidenav a.disabled {
+  color: #bfbfbd;
+}
+.sidenav .user-profil {
+  position: absolute;
+  top: 35px;
+  font-size: 1.2em;
+  color: #cecece;
+}
+.sidenav .profil {
+  height: 50px;
+}
+.menus-content {
+  margin-top: 90px;
+}
+.menu-content {
+  display: none;
+  width: 100%;
+}
+.menu-content.active {
+  display: block;
+}
+
+
+/* ---- Container ---- */
+.column, .column-4, .column-right, .column-4-right {
+  margin-top: 0;
+  float: left;
+  padding: 5px;
+}
+.column, .column-right{
+  width: 100%;
+}
+.column-4, .column-4-right {
+  width: 50%;
+}
+.column-right, .column-4-right {
+  float: right;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* ---- Input ---- */
+* {
+  box-sizing: border-box;
+}
+
+input, select {
+  font-size: 10px;
+}
+input[type=text], input[type=number], input[type=date], input[type=color], input[type=password], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  resize: vertical;
+}
+input[type=color] {
+  height: 4em;
+}
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+.font-14 {
+  font: 14px/1.4em Calibri, Sans-Serif;
+}
+
+/* ---- Multi select ---- */
+.multiselect {
+  width: 100%;
+  position: relative;
+}
+.selectBox {
+  position: relative;
+}
+.selectBox select {
+  font-weight: bold;
+  width: 100%;
+}
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+#checkboxes {
+  display: none;
+  position: absolute; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border: 1px #dadada solid;
+}
+#checkboxes label {
+  display: block;
+  padding: 5px 15px 0 0;
+}
+#checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+/* ---- Input checkbox ---- */
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 10px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+.container .cross {
+  background-image: url(cross-container.png);
+  background-size: cover;
+}
+.container .mesh {
+  background-image: url(mesh-container.png);
+}
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* ---- Button ---- */
+.btn {
+  background-color: #02658e;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.btn-black {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+}
+.btn-black:hover {
+  background-color: #555555;
+  color: white;
+}
+
+.btn-white {
+  color: white;
+  border: 2px solid white;
+}
+.btn-white:hover {
+  background-color: white;
+  color: black;
+}
+
+.btn-blue {
+  background-color: transparent;
+  color: black;
+  border: 2px solid #02658e;
+}
+.btn-blue:hover {
+  background-color: #02658e;
+}
+
+/* ---- Modal ---- */
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 15; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    min-width: 250px;
+}
+.modal-content h3 {
+  margin: 0.975em 0 0.2em 0;
+  font-size: 0.875em;
+  color: #02658e;
+  letter-spacing: 1px;
+}
+.modal-content p {
+  margin: 0.975em 0 0.2em 0;
+  font-size: 0.775em;
+  color: #02658e;
+  letter-spacing: 1px;
+}
+
+/* The Close Button */
+.close_s, .close_p, .close_t {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close_s:hover,
+.close_s:focus,
+.close_p:hover,
+.close_p:focus,
+.close_t:hover,
+.close_t:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* ---- Modal modif schedules ---- */
+.who-options {
+  display: none;
+}
+.who-options.active {
+  display: block;
+}
+
+/* ---- Administration ---- */
+.admin-menu {
+  width: 20%; /* Set a width if you like */
+  height: inherit;
+  float: left;
+  padding: 0;
+}
+.admin-menu a, .admin-menu li {
+  background-color: #eee; /* Grey background color */
+  font-size: 0.775em;
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+  border-bottom: 2px solid #eee;
+  border-right: 2px solid #eee;
+}
+.admin-menu a:hover, .admin-menu li:hover {
+  background-color: #e6e6e6; /* Dark grey background on mouse-over */
+}
+.admin-menu a.active, .admin-menu li.active {
+  background-color: #cecece; /* Add a grey color to the "active/current" link */
+}
+.admin-content {
+  width: 80%;
+  height: inherit;
+  float: left;
+  padding: 0 10% 50px 10%;
+}
+.admin-content.user-nav {
+  width: 60%;
+}
+.admin-content h3 {
+  font-size: 0.975em;
+  color: #02658e;
+  margin-bottom: 1.5em;
+}
+.admin-content p {
+  margin: 0.875em 0 0 0;
+  font-size: 0.775em;
+  color: #02658e;
+  letter-spacing: 1px;
+}
+.admin-content, .user-content, .user-sidenav {
+  display: none;
+}
+.admin-content.active, .user-content.active, .user-sidenav.active {
+  display: block;
+}
+
+/* ---- Profile ---- */
+.profile-content {
+  width: 100%;
+  height: inherit;
+  float: left;
+  padding: 0 10% 50px 10%;
+}
+.profile-content h3 {
+  font-size: 0.975em;
+  color: #02658e;
+  margin-bottom: 1.5em;
+}
+.profile-content p {
+  margin: 0.875em 0 0 0;
+  font-size: 0.775em;
+  color: #02658e;
+  letter-spacing: 1px;
+}
+
+/* ---- Footer Copyright ---- */
+.copyright {
+  margin: 1em;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.copyright p {
+  font-size: 0.675em;
+  color: #02658e;
+  line-height:1.8em;
+}
+.copyright p a{
+  color: #02658e;
+}
+.copyright p a:hover{
+  color:#56c8dc;
+}
+
+/* --- Date picker ---- */
+#position {
+  position: relative;
+}
+.calendar {
+  background: #FFF;
+  box-shadow: 0 0 5px rgba(0,0,0,.4);
+
+  position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+}
+.date-input-fallback {
+  display: inline-block;
+}
+.date-input-native {
+  display: none;
+}
+
+.js-no-type-date-support .date-input-native {
+  display: none !important;
+}
+.js-no-type-date-support .date-input-fallback {
+  display: inline-block !important;
+}
+
+
+/* ---- Media queries ---- */
+@media only screen and (min-width: 768px) {
+  .wrapper {
+    position: relative;
+    width: device-width;
+    margin: auto;
+  }
+
+  h1.logo a img {
+    width: auto;
+    height: 45px;
+  }
+
+  .beta {
+    font-size: 16px;
+    margin-top: 11px;
+  }
+
+  .sidenav a {
+    font-size: 1.4em;
+  }
+  .sidenav .user-profil {
+    font-size: 1.2em;
+  }
+
+  .column, .column-4, .column-right, .column-4-right {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .column, .column-right {
+    width: 50%;
+  }
+  .column-4, .column-4-right {
+    width: 25%;
+  }
+  .row:after {
+    padding: 5px;
+  }
+
+  .container {
+    font-size: 22px;
+  }
+  .modal-content h3 {
+    font-size: 1em;
+  }
+  .modal-content p {
+    font-size: 0.875em;
+  }
+
+  input, select {
+    font-size: 12px;
+  }
+  input[type=color] {
+    height: 3.5em;
+  }
+  .btn {
+    font-size: 12px;
+  }
+
+  .admin-content h3 {
+    font-size: 1.5em;
+  }
+  .admin-content p {
+    font-size: 0.875em;
+  }
+  .admin-menu a, .admin-menu li {
+    font-size: 0.875em;
+  }
+
+  .profile-content h3 {
+    font-size: 1.5em;
+  }
+  .profile-content p {
+    font-size: 0.875em;
+  }
+
+  .copyright p {
+    font-size: 0.875em;
+  }
+}
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}

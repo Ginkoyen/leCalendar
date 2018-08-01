@@ -1,0 +1,54 @@
+<!-- HEADER
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SOLSTEO project</title>
+    <!--Custom Theme files-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- Custom Theme files -->
+    <link href="login.css" rel="stylesheet" type="text/css" media="all" />
+  </head>
+  <body>
+    <h1 class="logo"><a href="https://www.solsteo.com"><img src="solsteo_logo_min.png" alt="SOLSTEO"></a></h1>
+    <!-- main -->
+    <div class="main">
+      <!--login-profile-->
+      <div class="signin-form profile">
+        <h3>Connexion</h3>
+
+        <div class="login-form">
+          <form action="/login" method="post">
+            <input type="text" name="login" placeholder="Nom d'utilisateur" required="">
+            <input type="password" name="password" placeholder="Mot de passe" required="">
+            <div class="tp">
+              <input type="submit" value="CONNEXION">
+            </div>
+          </form>
+        </div>
+        <% if (err) { %><p style="color: red;"><%= err %></p><% } %>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+    <div class="copyright">
+      <p>Copyright &copy;2018 SOLSTEO PLD</p>
+    </div>
+  </body>
+</html>

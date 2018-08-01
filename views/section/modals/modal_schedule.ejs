@@ -1,0 +1,235 @@
+<!-- HEADER
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+-->
+
+<!-- The Modal of schedule modififcation -->
+<div id="modal_modif_s" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="row">
+      <span class="close_s">&times;</span>
+    </div>
+
+    <form action="/modal_sch" method="post">
+      <!-- Date selection -->
+      <div class="row">
+        <div class="column">
+          <div id="position">
+            <h3>Date de début</h3>
+            <input class="date-input-native" id="dateFrom_s" type="date" name="date">
+            <input class="date-input-fallback" id="altFrom_s" type="text" placeholder="Date de début" required="">
+            <div id="pickerFrom_s" hidden></div>
+          </div>
+        </div>
+        <div class="column">
+          <div id="position">
+            <h3>Date de fin</h3>
+            <input class="date-input-native" id="dateTo_s" type="date" name="date">
+            <input class="date-input-fallback" id="altTo_s" type="text" placeholder="Date de fin" required="">
+            <div id="pickerTo_s" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Project and Project details -->
+        <div class="column">
+          <div class="row">
+            <div class="column">
+              <h3>Projet</h3>
+              <select id="project_s">
+                <option>Aucun</option>
+              </select>
+            </div>
+            <div class="column">
+              <h3>Attribution</h3>
+              <div class="multiselect">
+                <div class="selectBox" onclick="showCheckboxes()">
+                  <select id="selectBoxes"><option></option></select>
+                  <div class="overSelect"></div>
+                </div>
+                <div id="checkboxes"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row pjt_checkboxes_s">
+            <div class="column-4">
+              <p>Suppr.</p>
+              <label class="container">
+                <input class="project_del_s" type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="column-4">
+              <p>Temp.</p>
+              <label class="container">
+                <input class="project_temp_s" type="checkbox">
+                <span class="checkmark mesh"></span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <h3>Détails du projet</h3>
+            <input list="project_details_s" type="text" name="project_details_s" size="8" placeholder="Détails du projet" />
+            <datalist id="project_details_s"></datalist>
+          </div>
+        </div>
+        <!-- Who and Who details -->
+        <div class="column">
+          <div class="row">
+            <h3>Statut</h3>
+            <select id="whoS_s">
+              <option>Tout</option>
+            </select>
+          </div>
+          <div class="who-options Tout active">
+            <div class="row">
+              <div class="column-4 who-del-col_s">
+                <p>Suppr.</p>
+                <label class="container">
+                  <input class="who_del_s" type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="column-4 del-col">
+                <p>Temp.</p>
+                <label class="container">
+                  <input class="who_temp_s" type="checkbox">
+                  <span class="checkmark mesh"></span>
+                </label>
+              </div>
+              <div class="column-4 del-col">
+                <p>Depl.</p>
+                <label class="container">
+                  <input class="who_depl_s" type="checkbox">
+                  <span class="checkmark cross"></span>
+                </label>
+              </div>
+              <div class="column-4 del-col">
+                <p>Indisp.</p>
+                <label class="container">
+                  <input class="who_indisp_s" type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div class="row del-col">
+              <h3>Details du statut</h3>
+              <input class="who_det_s" type="text" name="value" size="8" maxlength="12" placeholder="Détails" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Validate button -->
+      <div class="row">
+        <p></p>
+        <div class="column-4-right"><input id="check_s" type="submit" class="btn btn-black" value="VALIDER" /></div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- The Modal of project modififcation -->
+<div id="modal_modif_p" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="row">
+      <span class="close_p">&times;</span>
+    </div>
+
+    <form action="/modal_project" method="post">
+      <!-- Project selection -->
+      <div class="row">
+        <div class="column">
+          <h3>Projet</h3>
+          <input id="shortId_p" type="text" hidden />
+          <select id="name_p"></select>
+          <input id="newName_p" type="text" name="value" placeholder="Nouveau projet" />
+        </div>
+        <div class="column">
+          <h3>Nouveau</h3>
+          <label class="container">
+            <input id="new_p" type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+        </div>
+      </div>
+      <!-- Project edition -->
+      <div class="row">
+        <div class="column">
+          <h3>Type</h3>
+          <select id="type_p">
+            <option>Général</option>
+            <option>Projet</option>
+            <option>Commercial</option>
+          </select>
+        </div>
+        <div class="column">
+          <h3>Couleur</h3>
+          <input id="color_p" type="color" default="white">
+        </div>
+      </div>
+      <!-- Validate button -->
+      <div class="row">
+        <p></p>
+        <div class="column-right">
+          <input id="check_p_del" type="button" class="btn btn-black" value="SUPPRIMER" />
+          <input id="check_p_add" type="submit" class="btn btn-black" value="VALIDER" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- The Modal of team modififcation -->
+<div id="modal_modif_t" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="row">
+      <span class="close_t">&times;</span>
+    </div>
+
+    <form action="/modal_team" method="post">
+      <!-- Date edition -->
+      <div class="row">
+        <div id="position">
+          <h3>A partir de</h3>
+          <input class="date-input-native" id="date_t" type="date" name="date">
+          <input class="date-input-fallback" id="alt_t" type="text" placeholder="A partir de" required="">
+          <div id="picker_t" hidden></div>
+        </div>
+      </div>
+      <!-- Who selection -->
+      <div class="row">
+        <h3>Qui</h3>
+        <input list="who_t" type="text" name="who_t" size="8" placeholder="Qui" required="" />
+        <datalist id="who_t"></datalist>
+      </div>
+      <!-- Validate button -->
+      <div class="row">
+        <p></p>
+        <div class="column-right">
+          <input id="check_t_del" type="button" class="btn btn-black" value="SUPPRIMER" />
+          <input id="check_t_add" type="submit" class="btn btn-black" value="AJOUTER" />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

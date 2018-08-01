@@ -1,0 +1,84 @@
+<!-- HEADER
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Le Calendar</title>
+    <meta name="decription" content="SOLSTEO Management">
+    <meta name="author" content="Pierre LE DU">
+
+    <meta name="viewport" content="witdh=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="picker.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="schedule.css" />
+
+    <link rel="shortcut icon" href="logo.ico">
+  </head>
+  <body>
+    <a id="mediatype" class="<% if (mobile) { %><%= mobile %><% } %>" hidden></a>
+    <div class="wrapper">
+      <!-- Header -->
+      <header>
+        <h1 class="logo"><a href="https://www.solsteo.com"><img src="solsteo_logo_min.png" alt="SOLSTEO"></a></h1>
+        <a class="menu-open" href="javascript:void(0)"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
+        <p class="beta">BETA V0.2.10</p>
+      </header>
+
+      <!-- Content -->
+      <div>
+        <!-- Menu -->
+        <div class="sidenav">
+          <a href="#profil" class="user-profil"><% if (user) { %><%= user.username %><% } %></a>
+          <div class="profil"></div>
+
+          <a href="#schedule" class="active">Calendrier</a>
+          <!-- <a href="#todo"> --> <a class="disabled">Todo</a>
+          <% if (user && user.type >= 10 && (user.profil.viewerMode == 0 || (user.profil.viewerMode == 1 && !mobile))) { %><a href="#admin">Administration</a><% } %>
+          <a href="/logout">Deconnexion</a>
+        </div>
+
+        <!-- Menu content -->
+        <div class="menus-content">
+          <div class="menu-content active" id="schedule">
+            <% if (user) { %><%- include('section/schedule', { user: user }) %><% } %>
+          </div>
+          <div class="menu-content" id="todo">
+            <% if (user) { %><%- include('section/todo', { user: user }) %><% } %>
+          </div>
+          <div class="menu-content" id="admin">
+            <% if (user && user.type >= 10 && (user.profil.viewerMode == 0 || (user.profil.viewerMode == 1 && !mobile))) { %><%- include('section/administration.ejs', { user: user, users: users }) %><% } %>
+          </div>
+          <div class="menu-content" id="profil">
+            <% if (user) { %><%- include('section/profile', { user: user }) %><% } %>
+          </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="copyright">
+        <p>Copyright &copy;2018 SOLSTEO PLD</P>
+      </footer>
+    </div>
+  </body>
+
+  <!-- Include javascript -->
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="view_sch.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</html>

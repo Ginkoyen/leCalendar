@@ -1,0 +1,110 @@
+<!-- HEADER
+Copyright 2018 Pierre LE DU
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see https://www.gnu.org/licenses/.
+-->
+
+<div>
+  <div class="admin-menu admin-sidenav">
+    <a href="#admin-mod" id="admin-menu_mod" class="active">Modification</a>
+    <a href="#admin-new" id="admin-menu_new">Ajouter</a>
+  </div>
+
+  <ul class="admin-menu user-sidenav active">
+    <% users.forEach(function(index) { %>
+      <li href="#<%= index.username %>"><%= index.username %></li>
+    <% }) %>
+  </ul>
+
+  <div id="admin-mod" class="admin-content user-nav active">
+    <h3>Modification des utilisateurs</h3>
+    <% users.forEach(function(index) { %>
+      <div id="<%= index.username %>" class="user-content">
+        <form action="/modif_users" method="post">
+          <input type="text" name="id_m" value="<%= index.id %>" hidden>
+          <p>Adresse email</p>
+          <input type="text" name="email_m" placeholder="E-mail" required="" value="<%= index.email %>">
+          <p>Nom d'utilisateur</p>
+          <input type="text" name="username_m" placeholder="Nom d'utilisateur" required="" value="<%= index.username %>">
+          <p>Nom complet</p>
+          <input type="text" name="fullname_m" placeholder="Nom complet" required="" value="<%= index.fullname %>">
+          <p>Type d'utilisateur</p>
+          <select name="type_m" required="">
+            <option value="1" <% if (index.type == 1) { %>selected<% } %>>Utilisateur</option>
+            <option value="5" <% if (index.type == 5) { %>selected<% } %>>Modérateur</option>
+            <option value="10" <% if (index.type == 10) { %>selected<% } %>>Administrateur</option>
+          </select>
+          <p>Mot de passe</p>
+          <input type="password" name="password_m" placeholder="Mot de passe">
+          <p>Date de création : <%= index.dateCreation.toLocaleDateString('fr-FR') %></p>
+          <div class="row">
+            <div class="column">
+              <p>Nouveau mot de passe</p>
+              <label class="container">
+                <input type="checkbox" name="firstPassword_m" <% if (index.firstPassword) { %>checked<% } %>>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+            <div class="column">
+              <p>Bloquer l'accès utilisateur</p>
+              <label class="container">
+                <input type="checkbox" name="blocked_m" <% if (index.blocked) { %>checked<% } %>>
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column">
+              <input type="submit" class="btn btn-blue" value="APPLIQUER">
+            </div>
+          </form>
+          <div class="column">
+            <form action="/delete_users" method="post">
+              <input type="text" name="id_d" value="<%= index.id %>" hidden>
+              <input type="submit" class="btn btn-blue" value="SUPPRIMER">
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+    <div class="clear"></div>
+  </div>
+
+  <div id="admin-new" class="admin-content">
+    <h3>Ajouter un nouvel utilisateur</h3>
+    <form action="/register" method="post">
+      <p>Adresse email</p>
+      <input type="text" name="email_r" placeholder="E-mail" required="">
+      <p>Nom d'utilisateur</p>
+      <input type="text" name="username_r" placeholder="Nom d'utilisateur" required="">
+      <p>Nom complet</p>
+      <input type="text" name="fullname_r" placeholder="Nom complet" required="">
+      <p>Type d'utilisateur</p>
+      <select name="type_r" required="">
+        <option value="1">Utilisateur</option>
+        <option value="5">Modérateur</option>
+        <option value="10">Administrateur</option>
+      </select>
+      <p>Mot de passe</p>
+      <input type="password" name="password_r" placeholder="Mot de passe" required="">
+      <p>Comfirmation du mot de passe</p>
+      <input type="password" name="passwordConf_r" placeholder="Confirmation du mot de passe" required="">
+      <div class="column-right">
+        <input type="submit" class="btn btn-blue" value="ENREGISTRER">
+      </div>
+    </form>
+    <div class="clear"></div>
+  </div>
+  <script type="text/javascript" src="administration.js"></script>
+</div>
