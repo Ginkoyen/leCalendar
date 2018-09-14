@@ -24,7 +24,7 @@ along with this program.  If not, see https://www.gnu.org/licenses/.
     <a id="btn_redo_s" class="disabled">↻</a>
     <!-- Trigger/Open The Modal -->
     <a id="btn_modif_s">Modification</a>
-    <a id="btn_archive_s" class="disabled">Archives</a>
+    <a id="btn_archive_s">Archives</a>
     <a id="btn_modif_p">Projet</a>
     <a id="btn_modif_t">Team</a>
   </div>
@@ -38,9 +38,11 @@ along with this program.  If not, see https://www.gnu.org/licenses/.
 
 <script type="text/javascript" src="schedule.js"></script>
 <% if (user.type >= 5 && (user.profil.viewerMode == 0 || (user.profil.viewerMode == 1 && !mobile))) { %>
+  <script type="text/javascript" src="cell_sch.js"></script>
   <script type="text/javascript" src="modal.js"></script>
   <script type="text/javascript" src="modal_sch.js"></script>
   <script type="text/javascript" src="modal_prj.js"></script>
+  <script type="text/javascript" src="modal_archives.js"></script>
   <script type="text/javascript" src="modal_team.js"></script>
   <script type="text/javascript" src="picker.js"></script>
   <script type="text/javascript" src="date_picker.js"></script>

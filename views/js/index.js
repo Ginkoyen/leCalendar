@@ -58,57 +58,18 @@ if (mobile) {
   document.querySelector('.schedules-content').classList.add('scroll')
 }
 
-class Schedules {
-  // Constructor
-  constructor() {
-    this.months = new Object()
-    this.start = undefined
-    this.end = undefined
-    this.project = undefined
-    this.team = undefined
-
-    this.monthFrom = getMonth(new Date())
-    this.monthTo = getMonth(new Date())
-  }
-  updateDateMonth(monthFrom, nbrMonth) {
-    if (monthFrom) {
-      this.monthFrom = monthFrom
-    }
-    this.monthTo = setMonth(monthFrom, nbrMonth)
-  }
-  updateDate() {
-    var months = findHeader(this.months)
-    this.start = getDate(months[0])
-    this.end = getDate(months[months.length-1])
-  }
-  updateInfos(months, project, team) {
-    if (months) {
-      for (var month in months) {
-        this.months[month] = months[month]
-      }
-    }
-    if (project) {
-      this.project = project
-    }
-    if (team) {
-      this.team = team
-    }
-  }
-}
-var sch = new Schedules()
-
-sch.updateDateMonth(getMonth(new Date()), parseInt(document.querySelector('#nbrMonth_mp').value))
+Sch.updateDateMonth(Sch.getMonth(new Date()), false, parseInt(document.querySelector('#nbrMonth_mp').value))
 
 /* --- SOCKET IO --- */
-var socket = io.connect/*('http://solsteoapp.tk')*/('http://localhost:8082')/*('http://82.227.24.160')*/
+var socket = io.connect/*('http://solsteoapp.tk')*//*('http://localhost:8082')*/('http://82.227.24.160')
 //console.log(window.cookie)
-socket.emit('getSch', sch.monthFrom, sch.monthTo)
+socket.emit('getSch', Sch.request.month_from, Sch.request.month_to)
 
 socket.on('schedule', function (data) {
   var obj = JSON.parse(data)
   console.log(obj)
-  sch.updateInfos(obj.schedule, obj.project, obj.team)
-  sch.updateDate()
+  Sch.updateInfos(obj.first_date, obj.last_date, obj.schedule, obj.project, obj.team)
+  Sch.updateDate()
 
   var x = [], y = []
   var schedules_header = document.querySelector('.schedules-header')
@@ -120,7 +81,7 @@ socket.on('schedule', function (data) {
     y.push(schedules_header.scrollTop)
     y.push(schedules_content.scrollTop)
   }
-  showSchedule('.schedules-header', '.schedules-content', sch.months, mobile)
+  showSchedule('.schedules-header', '.schedules-content', Sch.months, mobile)
 
   try {
     schedules_content.scrollTo(x.pop(), y.pop())

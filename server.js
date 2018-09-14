@@ -96,6 +96,7 @@ db.once('open', function (err) {
     app.use(express.static(__dirname + '/style'))
     .use(express.static(__dirname + '/style/min'))
     .use(express.static(__dirname + '/views/js'))
+    .use(express.static(__dirname + '/views/js/sch'))
     .use(express.static(__dirname + '/views/js/min'))
     .use(express.static(__dirname + '/assets'))
 
@@ -145,7 +146,7 @@ db.once('open', function (err) {
 
               if (obj_c.schedule) {
                 for (var month in obj_c.schedule) {
-                  var header = sch.findHeader(obj.schedule)
+                  var header = gsch.findHeader(obj.schedule)
 
                   if ((header.indexOf(month) === -1)) {
                     obj.schedule[month] = obj_c.schedule[month]

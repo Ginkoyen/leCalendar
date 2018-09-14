@@ -411,7 +411,7 @@ label {
 }
 
 /* The Close Button */
-.close_s, .close_p, .close_t {
+.close_s, .close_a, .close_p, .close_t {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -419,6 +419,8 @@ label {
 }
 .close_s:hover,
 .close_s:focus,
+.close_a:hover,
+.close_a:focus,
 .close_p:hover,
 .close_p:focus,
 .close_t:hover,
