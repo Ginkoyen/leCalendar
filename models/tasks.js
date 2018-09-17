@@ -23,7 +23,7 @@ var mongoose = require('mongoose')
 // Cell = [Bordure, Details, DetailsColor, Project, Background]
 var tasksSchema = new mongoose.Schema({
   author: { type: String, match: /^[a-zA-Z0-9-_]+$/ },
-  type: { type: String, default: "general" },
+  type: String,
   month: Number,
   day: Number,
   person: String,

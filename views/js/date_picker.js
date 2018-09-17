@@ -35,7 +35,7 @@ var date_picker_s = function () {
 			altInputFrom.value = format(value.start)
 			hide()
 			findProjDet_s()
-			findAttr_s(new Date(dateInputFrom.value), false)
+			findAttr_s(new Date(dateInputFrom.value), false, false)
 			setDateTo_s(dateInputFrom.value)
 		}
 	}
