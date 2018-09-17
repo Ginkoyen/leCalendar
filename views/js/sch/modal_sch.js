@@ -379,12 +379,23 @@ function findProjDet_s () {
 }
 
 // Find team and create selection
-function findAttr_s (date, who_sel) {
+function findAttr_s (date, who_sel, clear) {
   var who = document.querySelector('#checkboxes')
   var whoSel_obj = document.querySelector('#selectBoxes'),
       whopts = whoSel_obj.querySelectorAll('option')
   var whoS = Sch.findHeader(Sch.months[Sch.getMonth(date)])
   var count = 0
+
+  // Save exists checkbox checked
+  var who_sc = {}
+  var who_s = who.querySelectorAll('input[type=checkbox].who_s')
+  for (var i = 0; i < who_s.length; i++) {
+    who_sc[who_s[i].value] = {}
+    who_sc[who_s[i].value].proj = false
+    if (who_s[i].checked) {
+      who_sc[who_s[i].value].proj = true
+    }
+  }
 
   who.innerHTML = ""
   who.style.display = "none"
@@ -413,14 +424,15 @@ function findAttr_s (date, who_sel) {
     }
   }
 
-  if (who_sel) {
-    var header = Sch.findHeader(who_sel)
+  if (who_sel || !clear) {
+    var who_val = (who_sel) ? who_sel : who_sc
+    var header = Sch.findHeader(who_val)
     for (var i = 0; i < header.length; i++) {
       var checkbox = document.querySelector('input[value='+header[i]+'].who_s')
       if (checkbox) {
-        checkbox.checked = who_sel[header[i]].proj
+        checkbox.checked = who_val[header[i]].proj
       }
-      if (who_sel[header[i]].proj) {
+      if (who_val[header[i]].proj) {
         count++
       }
     }
@@ -444,12 +456,12 @@ function openSchModal (mod, task) {
 
   if (task) {
     findProj_s(task.project[0])
-    findAttr_s(new Date(task.dateFrom), Object.assign({}, task.who))
+    findAttr_s(new Date(task.dateFrom), Object.assign({}, task.who), true)
     whoDefine (new Date(task.dateFrom), mod, Object.assign({}, task.who), Object.assign({}, task.project[1]), task.team_ptr)
   }
   else {
     findProj_s(false)
-    findAttr_s(Sch.start, false)
+    findAttr_s(Sch.start, false, true)
     whoDefine (Sch.start, mod, null, null, null)
   }
 
@@ -483,7 +495,7 @@ function convPersons (project_name, attr, proj, project_ref, persons_ref) {
   //console.log(attr)
 
   var project = project_ref
-  if (proj && proj != "Aucun" && (!project.del && project.det && project.det != "")) {
+  if (proj && proj != "Aucun" || (!project.del && project.det && project.det != "")) {
     persons[project_name] = {
       del: project.del,
       det: project.det,

@@ -61,7 +61,7 @@ if (mobile) {
 Sch.updateDateMonth(Sch.getMonth(new Date()), false, parseInt(document.querySelector('#nbrMonth_mp').value))
 
 /* --- SOCKET IO --- */
-var socket = io.connect/*('http://solsteoapp.tk')*//*('http://localhost:8082')*/('http://82.227.24.160')
+var socket = io.connect/*('http://solsteoapp.tk')*/('http://localhost:8082')/*('http://82.227.24.160')*/
 //console.log(window.cookie)
 socket.emit('getSch', Sch.request.month_from, Sch.request.month_to)
 
